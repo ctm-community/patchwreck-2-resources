@@ -1,0 +1,73 @@
+#version 150
+
+in vec4 vertexColor;
+in vec2 coord;
+flat in int loading;
+
+uniform vec4 ColorModulator;
+uniform mat4 ModelViewMat;
+uniform vec2 ScreenSize;
+
+out vec4 fragColor;
+
+uvec4 logo_data[45] = uvec4[](uvec4(0,1920,0,255),uvec4(3221225472,31,2168455168,3),uvec4(4162404352,0,2114189600,0),uvec4(266342394,536870912,66588575,4197449728),uvec4(4162047,3220344832,1040447,4290770136),uvec4(7169,4294918117,3355443248,3825205119),uvec4(3924295680,669515775,1066003456,2607103),uvec4(4264561652,28423,4294838163,4127195214),uvec4(134217727,2482110464,1578106879,4288147968),uvec4(14422015,4294944763,39967,4294967207),uvec4(4177527192,536870911,603029505,2155872255),uvec4(4282643584,18874367,4294859254,3221438463),uvec4(4294966936,3871343231,4294967294,2565816322),uvec4(4294967295,4239929184,117440511,4294785039),uvec4(2684682239,4294966640,531629311,4294967289),uvec4(1981779980,3355443199,4202143696,134742015),uvec4(4294109119,3625568255,4294935279,4293399527),uvec4(4294963260,4026526739,4026531335,3268411364),uvec4(938475456,4160905215,4096253944,520354079),uvec4(4294324191,65028093,536869487,2155610367),uvec4(4246732795,1142915326,4294746111,4190232607),uvec4(4269800607,4294835715,4294934464,1610612096),uvec4(2147483392,1045430269,2415919103,134164479),uvec4(4216324095,4287627183,4294660095,4294942719),uvec4(2818570863,4294967263,4288151546,671088639),uvec4(3758085119,4130865151,4293918667,4294187007),uvec4(4294963199,2315252763,4294967271,4026925044),uvec4(201326591,4093904383,3960078335,4294049588),uvec4(4293398015,4294967295,855525380,4294967295),uvec4(4289887240,117440511,4294934908,402817023),uvec4(4294967241,1007682431,4294967295,4240183297),uvec4(2147483647,4294884400,20971519,4294966939),uvec4(536985599,4294967294,1260388511,4294967295),uvec4(4282589184,3758096383,4294910816,5242879),uvec4(4294967207,1073767951,4294967295,2470445088),uvec4(4026531839,4291969024,871366655,4294955200),uvec4(1308671,4294967240,2147488759,4294967295),uvec4(3900702747,4093640703,4293165056,166840319),uvec4(4294964608,913431,4294967285,1025),uvec4(4093640703,3808428038,2147221503,4278648832),uvec4(41942015,4292935168,163837,4294713216),uvec4(895,4261380600,1,1073541247),uvec4(0,29358087,3758096384,40896),uvec4(4227858432,200,532676608,0),uvec4(1139802112,0,8323072,0));
+
+bool get_bit(int offset) {
+    int integer_idx = offset / 32;
+    int integer_bit = offset % 32;
+    int vec_idx = integer_idx / 4;
+    int vec_com = integer_idx % 4;
+    
+    uvec4 vec = logo_data[vec_idx];
+    uint integer;
+    switch(vec_com) {
+        case 0: integer = vec.x; break;
+        case 1: integer = vec.y; break;
+        case 2: integer = vec.z; break;
+        case 3: integer = vec.w; break;
+    }
+
+    return bool(integer & uint(0x1 << (31 - integer_bit)));
+}
+
+void draw(ivec2 origin, ivec2 v) {
+    if(v.x < origin.x || v.y < origin.y) return;
+    v -= origin;
+    if(v.x >= 72 || v.y >= 80) return;
+
+    if(get_bit(v.x + v.y * 72)) fragColor.rgb = vec3(1.0);
+}
+
+void main() {
+    vec4 color = vertexColor;
+    if (color.a == 0.0) discard;
+    fragColor = color * ColorModulator;
+
+    if((distance(fragColor.rgb, vec3(0.937254902, 0.196078431, 0.239215686)) < 0.0001 || length(fragColor.rgb) < 0.0001) && bool(loading) && dFdy(coord.y) > 0.0) {
+        vec2 v = coord; v.y = 1.0 - v.y;
+
+        fragColor.rgb = vec3(0.137, 0.780, 0.952);
+        fragColor.rgb = vec3(0.0);
+        fragColor.a -= 0.0;
+
+        ivec2 icoords = ivec2(v * ScreenSize);
+        ivec2 canvasSize = ivec2(ScreenSize);
+
+        if(ScreenSize.y < 700 || ScreenSize.x < 700) {
+            icoords *= 2;
+            canvasSize *= 2;
+        }
+
+        if(ScreenSize.y > 1400 && ScreenSize.x > 1400) {
+            icoords /= 2;
+            canvasSize /= 2;
+        } 
+
+        icoords /= 4;
+        canvasSize /= 4;
+
+        ivec2 origin = ivec2((canvasSize.x - 72) / 2, (canvasSize.y - 80) / 2);
+
+        draw(origin, icoords);
+    }
+}
