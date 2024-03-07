@@ -1,0 +1,10 @@
+{
+  "ambient.example": {
+    "sounds": [
+      {
+        "name": "ambient/example",
+        "stream": true
+      }
+    ]
+  }
+}
