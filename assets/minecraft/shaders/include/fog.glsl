@@ -11,13 +11,18 @@ const float  startMult_w = 1.0;
 const float   fadeMult_w = 1.0;
 const float brightMult_w = 0.5;
 const float brightThre_w = 0.6;
-const float brightDimm_w = 0.00;
+const float brightDimm_w = 0.01;
 const vec3   colorMult_w = vec3(255.0, 255.0, 255.0) / 255.0;
 
 const vec3     nightGlow = vec3(6.0, 1.0, 9.0) / 255.0;
 
 const vec3  skyColorMult = vec3(225.0, 215.0, 203.0) / 255.0;
 const float      skyFade = 0.5;
+
+const float whiteMult = 0.4;
+const float whiteBright = 600.00; //these control conditional biomes
+
+const float purpMult = 1.08;
 
 
 float rgbToLinear(float channel) {
@@ -47,6 +52,15 @@ vec4 linear_fog(vec4 inColor, float vertexDistance, float fogStart, float fogEnd
     float brightThre = fogStart < 0.1 ? brightThre_w : brightThre_l;
     float brightDimm = fogStart < 0.1 ? brightDimm_w : brightDimm_l;
     vec3   colorMult = fogStart < 0.1 ?  colorMult_w :  colorMult_l;
+
+    float white_dist = distance(fogColor, vec4(0.0,0.0,0.0,0.9)); //this is the conditional biome!
+    if(white_dist < 0.2) {
+        white_dist = 1.0 - white_dist / 0.1;
+        fadeMult = mix(fadeMult, fadeMult * whiteMult, white_dist);
+        brightDimm = mix(brightDimm, brightDimm * whiteBright, white_dist);
+    }
+
+   
 
     float fogRange = fogEnd - fogStart;
     fogStart *= startMult;
