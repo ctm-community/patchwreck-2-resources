@@ -1,6 +1,7 @@
 {
   "⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠ If you are reading this, please install the resource pack, Disconnect, and Reconnect ⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠": "\u00a77If you do not hear the music, open \u00a7aOptions \u00a77-> \u00a7aMusic & Sounds \u00a77-> adjust \u00a72Custom Ambience \u00a77Slider, then \u00a7fSave and Quit to title\u00a77 and re-open the world.",
   "lobby.settings": "§7§nRequired Settings§r\n\n§r§fClouds: §cOFF\n\n§r§fRender Distance:\n§7§lEXACTLY§r§a 12",
+  "<----": "§bStart\nMap\n\n\n\n\n\n\n\n\n",
   "soundCategory.record": "\u00a77Records & Note Blocks",
   "soundCategory.ambient": "\u00a72\u00a7lCustom Ambience",
   "soundCategory.voice": "\u00a77Voice",

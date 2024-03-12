@@ -70,5 +70,13 @@
         "stream": true
       }
     ]
+  },
+  "teleport": {
+    "sounds": [
+      {
+        "name": "teleport",
+        "stream": true
+      }
+    ]
   }
 }
