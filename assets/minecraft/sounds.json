@@ -1,8 +1,72 @@
 {
-  "ambient.example": {
+  "test": {
     "sounds": [
       {
-        "name": "ambient/example",
+        "name": "test",
+        "stream": true
+      }
+    ]
+  },
+  "wasteland": {
+    "sounds": [
+      {
+        "name": "wasteland",
+        "stream": true
+      }
+    ]
+  },
+  "tomb": {
+    "sounds": [
+      {
+        "name": "tomb",
+        "stream": true
+      }
+    ]
+  },
+  "grove": {
+    "sounds": [
+      {
+        "name": "grove",
+        "stream": true
+      }
+    ]
+  },
+  "gothic": {
+    "sounds": [
+      {
+        "name": "gothic",
+        "stream": true
+      }
+    ]
+  },
+  "metropolis": {
+    "sounds": [
+      {
+        "name": "metropolis",
+        "stream": true
+      }
+    ]
+  },
+  "lobby": {
+    "sounds": [
+      {
+        "name": "lobby",
+        "stream": true
+      }
+    ]
+  },
+  "monument": {
+    "sounds": [
+      {
+        "name": "monument",
+        "stream": true
+      }
+    ]
+  },
+  "credits": {
+    "sounds": [
+      {
+        "name": "credits",
         "stream": true
       }
     ]
