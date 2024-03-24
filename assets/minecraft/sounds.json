@@ -71,6 +71,46 @@
       }
     ]
   },
+  "credits1": {
+    "sounds": [
+      {
+        "name": "credits1",
+        "stream": true
+      }
+    ]
+  },
+  "credits2": {
+    "sounds": [
+      {
+        "name": "credits2",
+        "stream": true
+      }
+    ]
+  },
+  "credits3": {
+    "sounds": [
+      {
+        "name": "credits3",
+        "stream": true
+      }
+    ]
+  },
+  "credits4": {
+    "sounds": [
+      {
+        "name": "credits4",
+        "stream": true
+      }
+    ]
+  },
+  "credits5": {
+    "sounds": [
+      {
+        "name": "credits5",
+        "stream": true
+      }
+    ]
+  },
   "teleport": {
     "sounds": [
       {
